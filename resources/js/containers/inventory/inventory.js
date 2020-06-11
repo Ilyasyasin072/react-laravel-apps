@@ -51,6 +51,7 @@ const Inventory = () => {
                     <TableCell>Nama Barang </TableCell>
                     <TableCell>Calories</TableCell>
                     <TableCell>Fat&nbsp;(g)</TableCell>
+                    <TableCell>Fat&nbsp;(g)</TableCell>
                     <TableCell align="center">Actions</TableCell>
                 </TableRow>
             </TableHead>
@@ -65,6 +66,12 @@ const Inventory = () => {
                     </TableCell>
                     <TableCell>
                         {row.inventory_categories}
+                    </TableCell>
+                    <TableCell>
+                        {row.updated_at}
+                    </TableCell>
+                    <TableCell>
+                        {row.created_at}
                     </TableCell>
                     <TableCell>
                         <Button align="center">edit</Button>
