@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('inventory','InventoryController@index');
 Route::delete('inventory/delete/{id}', 'InventoryController@destroy');
+Route::post('inventory/create/','InventoryController@store');

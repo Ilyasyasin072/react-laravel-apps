@@ -9,8 +9,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import {Link} from 'react-router-dom';
 
 const Inventory = () => {
+
     const [inventory, seTinventory] = useState([]);
 
     useEffect(() => {
@@ -35,6 +38,9 @@ const Inventory = () => {
         table: {
           minWidth: 650,
         },
+        root: {
+            flexGrow: 1,
+          }
       });
 
     const classes = useStyles();
@@ -45,44 +51,55 @@ const Inventory = () => {
 
     
     return(
-    <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-                <TableRow>
-                    <TableCell>Nama Barang </TableCell>
-                    <TableCell>Calories</TableCell>
-                    <TableCell>Fat&nbsp;(g)</TableCell>
-                    <TableCell>Fat&nbsp;(g)</TableCell>
-                    <TableCell align="center">Actions</TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {inventory.map((row) => (
-                    <TableRow key={row.id}>
-                        <TableCell>
-                            {row.id}
-                        </TableCell>
-                    <TableCell name={row.id}>
-                        {row.inventory_name}
-                    </TableCell>
-                    <TableCell>
-                        {row.inventory_categories}
-                    </TableCell>
-                    <TableCell>
-                        {row.updated_at}
-                    </TableCell>
-                    <TableCell>
-                        {row.created_at}
-                    </TableCell>
-                    <TableCell>
-                        <Button align="center">edit</Button>
-                        <Button align="center" onClick={handleDelete.bind(this, row.id)}>delete</Button>
-                    </TableCell>
-                    </TableRow>
-                ))}
-            </TableBody>
-        </Table>
-    </TableContainer>
+        <div className={classes.root}>
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                <TableContainer component={Paper}>
+                    <Link to="add-inventory">
+                        <Button color="primary">Add Inventory Item</Button>
+                    </Link>
+                <hr/>
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Nama Barang </TableCell>
+                            <TableCell>Calories</TableCell>
+                            <TableCell>Fat&nbsp;(g)</TableCell>
+                            <TableCell>Fat&nbsp;(g)</TableCell>
+                            <TableCell>Fat&nbsp;(g)</TableCell>
+                            <TableCell>Actions</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {inventory.map((row) => (
+                            <TableRow key={row.id}>
+                                <TableCell>
+                                    {row.id}
+                                </TableCell>
+                            <TableCell name={row.id}>
+                                {row.inventory_name}
+                            </TableCell>
+                            <TableCell>
+                                {row.inventory_categories}
+                            </TableCell>
+                            <TableCell>
+                                {row.updated_at}
+                            </TableCell>
+                            <TableCell>
+                                {row.created_at}
+                            </TableCell>
+                            <TableCell>
+                                <Button align="center">edit</Button>
+                                <Button align="center" onClick={handleDelete.bind(this, row.id)}>delete</Button>
+                            </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+             </TableContainer>
+                </Grid>
+            </Grid>
+        </div>
     )
 }
 
