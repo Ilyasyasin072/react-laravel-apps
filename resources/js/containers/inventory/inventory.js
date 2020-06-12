@@ -25,8 +25,9 @@ const Inventory = () => {
     }, []);
 
     const handleDelete = (id) => {
+        console.log(name);
         axios.delete('http://127.0.0.1:8000/api/inventory/delete/' + id).then(result => {
-            alert("success");
+            seTinventory(inventory.filter(row => row.id !== id));
         })
     }
 
@@ -61,7 +62,7 @@ const Inventory = () => {
                         <TableCell>
                             {row.id}
                         </TableCell>
-                    <TableCell>
+                    <TableCell name={row.id}>
                         {row.inventory_name}
                     </TableCell>
                     <TableCell>
