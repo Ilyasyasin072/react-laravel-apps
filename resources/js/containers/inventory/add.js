@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Container , Button, TextField, Card, CardContent} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import {Redirect} from 'react-router-dom';
 import Axios from 'axios';
 
 const AddFormInventory = (props) => {
     const initialState = { id: null, inventoryname : '', inventorycategoris: ''}
     const [inventory, setInventory] = useState(initialState);
-    const [invent, setInven] = useState(false);
-
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -43,7 +40,6 @@ const AddFormInventory = (props) => {
         .then(result=>{
             setSubmit(true);
             setInventory(result.data);
-            {invent ? <Redirect to="inventory"/> : null}
         })
         .catch(error => {
         })
@@ -61,7 +57,7 @@ const AddFormInventory = (props) => {
                         required
                         fullWidth
                         id="inventoryname"
-                        label="Email Address"
+                        label="inventory name"
                         autoFocus
                         value={inventory.inventoryname}
                         onChange={handleChange}
@@ -72,7 +68,7 @@ const AddFormInventory = (props) => {
                         margin="normal"
                         required
                         fullWidth
-                        label="Email Address"
+                        label="inventory category"
                         autoFocus
                         value={inventory.inventorycategoris}
                         onChange={handleChange}
