@@ -70,7 +70,12 @@ class InventoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $inventory = Inventories::find($id);
+        try {
+            return response()->json($inventory);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -82,7 +87,13 @@ class InventoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $name = $request->inventoryname;
+        $categories = $request->inventorycategoris;
+
+        $inventory = Inventories::find($id);
+
+        $inventory->inventoryname = $name;
+        $inventory->inventorycategoris = $categories;
     }
 
     /**

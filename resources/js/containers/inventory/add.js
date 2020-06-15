@@ -40,6 +40,7 @@ const AddFormInventory = (props) => {
         .then(result=>{
             setSubmit(true);
             setInventory(result.data);
+            this.props.history.push('/')
         })
         .catch(error => {
         })
