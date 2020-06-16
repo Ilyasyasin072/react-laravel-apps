@@ -32,10 +32,30 @@ const Header = () => {
                     <Typography variant="h6" className={classes.title}>
                         News
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                
+                    <Link to="customers" style={{color: "white"}}>
+                        <Button color="inherit">Customers</Button>
+                    </Link>
+                    <Link to="staffs" style={{color: "white"}}>
+                        <Button color="inherit">Staffs</Button>
+                    </Link>
+                    <Link to="orders" style={{color: "white"}}>
+                        <Button color="inherit">Orders</Button>
+                    </Link>
+                    <Link to="stores" style={{color: "white"}}>
+                        <Button color="inherit">Stores</Button>
+                    </Link>
+                    <Link to="ordersitems" style={{color: "white"}}>
+                        <Button color="inherit">Orders Items</Button>
+                    </Link>
+
+                    <Link to="products" style={{color: "white"}}>
+                        <Button color="inherit">Products</Button>
+                    </Link>
                     <Link to="landing" style={{color: "white"}}>
                         <Button color="inherit">Landing</Button>
                     </Link>
+
                     <Link to="inventory" style={{color: "white"}}>
                         <Button color="inherit">Inventoy</Button>
                     </Link>
