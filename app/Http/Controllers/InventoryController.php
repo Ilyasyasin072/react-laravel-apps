@@ -37,17 +37,24 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-        $inventory = new Inventories();
+        try {
+            $inventory = new Inventories();
 
-        $name = $request->inventoryname;
-        $categories = $request->inventorycategoris;
-
-        $inventory->inventory_name = $name;
-        $inventory->inventory_categories = $categories;
-
-        if($inventory->save())
-        {
-            return response()->json($inventory);
+            $name = $request->inventoryname;
+            $categories = $request->inventorycategoris;
+    
+            $inventory->inventory_name = $name;
+            $inventory->inventory_categories = $categories;
+    
+            if($inventory->save())
+            {
+                return response()->json($inventory);
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                'error' => 'invalid'
+            ]);
         }
     }
 

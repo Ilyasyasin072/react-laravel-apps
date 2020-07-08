@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Router} from 'react-router-dom';
 import Landing from '../containers/landing/landing';
 import Inventory from '../containers/inventory/inventory';
 import Transactions from '../containers/transactions/transactions';
@@ -16,18 +16,18 @@ class RouterLink extends Component {
     render() {
         return (
             <Switch>
-                <Route exact path="/" component={Landing} />
-                <Route path="/inventory" component={Inventory} />
-                <Route path="/transaction" component={Transactions}/>
-                <Route path="/add-inventory" component={AddFormInventory}/>
-                <Route path="/customers" component={Customers}/>
-                <Route path="/brands" component={Brands}/>
-                <Route path="/staffs" component={Staffs}/>
-                <Route path="/orders" component={Orders}/>
-                <Route path="/products" component={Products}/>
-                <Route path="/ordersitems" component={OrderItems}/>
-                <Route path="/stores" component={Stores}/>
-                <Route path="/stock" component={Stocks}/>
+                    <Route exact path="/" component={Landing} />
+                    <Route path="/inventory" component={Inventory} />
+                    <Route path="/transaction" component={Transactions}/>
+                    <Route path="/add-inventory" component={AddFormInventory}/>
+                    <Route path="/customers" component={Customers}/>
+                    <Route path="/brands" component={Brands}/>
+                    <Route path="/staffs" component={Staffs}/>
+                    <Route path="/orders" component={Orders}/>
+                    <Route path="/products" component={Products}/>
+                    <Route path="/ordersitems" component={OrderItems}/>
+                    <Route path="/stores" component={Stores}/>
+                    <Route path="/stock" component={Stocks}/>
             </Switch>
         );
     }

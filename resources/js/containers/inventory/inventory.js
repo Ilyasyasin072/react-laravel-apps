@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
-
+import MUIDataTable from "mui-datatables";
 const Inventory = () => {
 
     const [inventory, seTinventory] = useState([]);
@@ -21,6 +21,7 @@ const Inventory = () => {
         .then(res => {
             // console.log(res.data);
             seTinventory(res.data);
+               
         })
         .catch(erorr =>{
             console.log(erorr);
@@ -28,7 +29,7 @@ const Inventory = () => {
     }, []);
 
     const handleDelete = (id) => {
-        console.log(name);
+        // console.log(name);
         axios.delete('http://127.0.0.1:8000/api/inventory/delete/' + id).then(result => {
             seTinventory(inventory.filter(row => row.id !== id));
         })
@@ -49,10 +50,15 @@ const Inventory = () => {
         console.log(id);
     }
 
+    const columns = ["inventory_name", "inventory_categories", "created_at", "updated_at"];
+    const options = {
+    filterType: 'checkbox',
+    };
+
     
     return(
         <div className={classes.root}>
-            <Grid container spacing={3}>
+            {/* <Grid container spacing={3}>
                 <Grid item xs={12}>
                 <TableContainer component={Paper}>
                     <Link to="add-inventory">
@@ -98,6 +104,22 @@ const Inventory = () => {
                 </Table>
              </TableContainer>
                 </Grid>
+            </Grid> */}
+            <Grid spacing={5}>
+                <Grid item xs={12}>
+                <Link to="add-inventory">
+                        <Button color="primary">Add Inventory Item</Button>
+                    </Link>
+                </Grid>
+                <Grid item xs={12}>
+                    <MUIDataTable
+                    title={"Employee List"}
+                    data={inventory}
+                    columns={columns}
+                    options={options}
+                    />
+                </Grid>
+            
             </Grid>
         </div>
     )

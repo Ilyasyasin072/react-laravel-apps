@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { Container , Button, TextField, Card, CardContent} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 const AddFormInventory = (props) => {
     const initialState = { id: null, inventoryname : '', inventorycategoris: ''}
     const [inventory, setInventory] = useState(initialState);
+    const history = useHistory();
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -28,22 +30,32 @@ const AddFormInventory = (props) => {
     }
 
     const onSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         const data = {
             inventoryname: inventory.inventoryname,
             inventorycategoris: inventory.inventorycategoris
         }
 
         console.log(data);
+        
 
         Axios.post('http://127.0.0.1:8000/api/inventory/create/', data)
         .then(result=>{
             setSubmit(true);
             setInventory(result.data);
-            this.props.history.push('/')
+        // this.props.history.push("/inventory");
+       
+
         })
         .catch(error => {
-        })
+        }); 
+        history.push('/inventory');
+        setInventory(initialState);
+        // history.push("inventory");
+    }
+
+    const onBack = () => {
+        history.push('/inventory');
     }
 
     return (
@@ -76,6 +88,7 @@ const AddFormInventory = (props) => {
                         name="inventorycategoris"
                     />
                     <Button color="primary" onClick={onSubmit}>Save</Button>
+                    <Button color="primary" onClick={onBack}>Back</Button>
                    </form>
                 </CardContent>
             </Card>
