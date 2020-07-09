@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Container , Button, TextField, Card, CardContent} from '@material-ui/core';
+import { Container , Button, TextField, Card, CardContent, Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
 import { useHistory } from "react-router-dom";
-
+import Box from '@material-ui/core/Box';
+import {
+    FormControl,
+    InputLabel,
+    Input
+  } from "@material-ui/core";
 const AddFormInventory = (props) => {
     const initialState = { id: null, inventoryname : '', inventorycategoris: ''}
     const [inventory, setInventory] = useState(initialState);
@@ -43,14 +48,15 @@ const AddFormInventory = (props) => {
         .then(result=>{
             setSubmit(true);
             setInventory(result.data);
+            
         // this.props.history.push("/inventory");
-       
 
         })
         .catch(error => {
         }); 
-        history.push('/inventory');
+        // history.push('/inventory');
         setInventory(initialState);
+        
         // history.push("inventory");
     }
 
@@ -61,10 +67,26 @@ const AddFormInventory = (props) => {
     return (
         <div className={classes.root}>
             <Container spacing={5}>
-            <Card>
+            {/* <Card>
                 <CardContent>
                    <form>
-                   <TextField
+                   
+                    
+                    <Button color="primary" onClick={onSubmit}>Save</Button>
+                    <Button color="primary" onClick={onBack}>Back</Button>
+                   </form>
+                </CardContent>
+            </Card> */}
+            <Grid>
+                <Grid item xs></Grid>
+                <Grid item xs>
+                    <Card>
+                        <CardContent>
+                        <form>
+                            <h1>Contact Form</h1>
+                    <FormControl margin="normal" fullWidth>
+                        {/* <InputLabel htmlFor="name">Name</InputLabel> */}
+                        <TextField
                         variant="outlined"
                         margin="normal"
                         required
@@ -76,7 +98,11 @@ const AddFormInventory = (props) => {
                         onChange={handleChange}
                         name="inventoryname"
                     />
-                    <TextField
+                    </FormControl>
+
+                    <FormControl margin="normal" fullWidth>
+                        {/* <InputLabel htmlFor="email">Email</InputLabel> */}
+                        <TextField
                         variant="outlined"
                         margin="normal"
                         required
@@ -87,11 +113,23 @@ const AddFormInventory = (props) => {
                         onChange={handleChange}
                         name="inventorycategoris"
                     />
-                    <Button color="primary" onClick={onSubmit}>Save</Button>
+                    </FormControl>
+
+                    <FormControl margin="normal" fullWidth>
+                        <InputLabel htmlFor="email">Message</InputLabel>
+                        <Input id="email" multiline rows={10} />
+                    </FormControl>
+
+                    <Button variant="contained" onClick={onSubmit} color="primary" size="medium">
+                        Send
+                    </Button>
                     <Button color="primary" onClick={onBack}>Back</Button>
-                   </form>
-                </CardContent>
-            </Card>
+                        </form>
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs></Grid>
+            </Grid>
         </Container>
         </div>
     )

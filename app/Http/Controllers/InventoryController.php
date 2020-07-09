@@ -115,4 +115,17 @@ class InventoryController extends Controller
         $delete->delete();
         return response()->json($delete);
     }
+
+
+    public function destroyAll($id) {
+        try {
+            $deleteAll = \DB::table('table_name')->truncate();
+            return response()->json($deleteAll);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                'errors' => 'invalid'
+            ]);
+        }
+    }
 }

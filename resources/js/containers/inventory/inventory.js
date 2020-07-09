@@ -33,7 +33,16 @@ const Inventory = () => {
         axios.delete('http://127.0.0.1:8000/api/inventory/delete/' + id).then(result => {
             seTinventory(inventory.filter(row => row.id !== id));
         })
+        console.log('success');
     }
+
+
+    const handleDeleteAll = (id) => {
+        axios.delete('http://127.0.0.1:8000/api/inventory/deleteAll/' + id).then(result => {
+            console.log(result);
+        })
+    }
+
 
     const useStyles = makeStyles({
         table: {
@@ -46,19 +55,91 @@ const Inventory = () => {
 
     const classes = useStyles();
 
-    const handleChange = (id) => {
-        console.log(id);
-    }
+    const addColumn = () => {
+        setColumns([ ...columns, {
+          name: "NewColumn"
+        }]);
+      };
 
-    const columns = ["inventory_name", "inventory_categories", "created_at", "updated_at"];
+    // const columns = ["inventory_name", "inventory_categories", "created_at", "updated_at"];
+    const columns = [
+        {
+         name: "inventory_name",
+         label: "Inventory Name",
+         options: {
+          filter: true,
+          sort: true,
+         }
+        },
+        {
+         name: "inventory_categories",
+         label: "Inventory Category",
+         options: {
+          filter: true,
+          sort: true,
+         }
+        },
+        {
+         name: "created_at",
+         label: "Create",
+         options: {
+          filter: true,
+          sort: false,
+         }
+        },
+        {
+         name: "updated_at",
+         label: "Update",
+         options: {
+          filter: true,
+          sort: false,
+         }
+        },
+        {
+            name: "id",
+            label: "Actions",
+            options: {
+              customBodyRender: (value, tableMeta, updateValue) => {
+                  console.log(value, tableMeta);
+                return (
+                  <Button onClick={handleDelete.bind(this, value)} variant="outlined" color="secondary">
+                    {`Delete`}
+                  </Button>
+                );
+              }
+            }
+          }
+       ];
+       
     const options = {
     filterType: 'checkbox',
+      filterType: 'dropdown', responsive: 'stacked', onRowsDelete: (rowsDeleted) => { 
+        // axios.delete('http://127.0.0.1:8000/api/inventory/deleteAll/' + id).then(result => {
+        // })  
+        console.log(result.data[0].dataIndex);
+        console.log(rowsDeleted, "were deleted!");
+         },
     };
 
     
     return(
         <div className={classes.root}>
-            {/* <Grid container spacing={3}>
+            <Grid container spacing={5}>
+                <Grid item xs={12}>
+                    <MUIDataTable
+                    // title={"Employee List"}
+                    title={<div><Link to="add-inventory">
+                    <Button color="primary">Add Inventory Item</Button>
+                </Link></div>}
+                    data={inventory}
+                    columns={columns}
+                    options={options}
+                    />
+                </Grid>
+            
+            </Grid>
+        </div>
+                    /* <Grid container spacing={3}>
                 <Grid item xs={12}>
                 <TableContainer component={Paper}>
                     <Link to="add-inventory">
@@ -104,24 +185,7 @@ const Inventory = () => {
                 </Table>
              </TableContainer>
                 </Grid>
-            </Grid> */}
-            <Grid spacing={5}>
-                <Grid item xs={12}>
-                <Link to="add-inventory">
-                        <Button color="primary">Add Inventory Item</Button>
-                    </Link>
-                </Grid>
-                <Grid item xs={12}>
-                    <MUIDataTable
-                    title={"Employee List"}
-                    data={inventory}
-                    columns={columns}
-                    options={options}
-                    />
-                </Grid>
-            
-            </Grid>
-        </div>
+            </Grid> */
     )
 }
 

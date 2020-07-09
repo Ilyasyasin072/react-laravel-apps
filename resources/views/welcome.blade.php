@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        {{-- <div class="flex-center position-ref full-height"> --}}
             {{-- @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -27,7 +27,7 @@
             <div class="content">
                 <div id="example"></div>
             </div>
-        </div>
+        {{-- </div> --}}
         <script src="{{asset('js/app.js')}}" ></script>
     </body>
 </html>
