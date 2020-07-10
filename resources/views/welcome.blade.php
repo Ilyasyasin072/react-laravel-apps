@@ -1,33 +1,29 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"> -->
 
-        <title>Laravel</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
-    <body>
-        {{-- <div class="flex-center position-ref full-height"> --}}
-            {{-- @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+    <title>React | Laravel</title>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif --}}
-            <div class="content">
-                <div id="example"></div>
-            </div>
-        {{-- </div> --}}
-        <script src="{{asset('js/app.js')}}" ></script>
-    </body>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+</head>
+<style>
+    html {
+        height: 100%;
+    }
+    
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+</style>
+
+<body>
+    <div id="example"></div>
+    <script src="{{asset('js/app.js')}}"></script>
+</body>
+
 </html>

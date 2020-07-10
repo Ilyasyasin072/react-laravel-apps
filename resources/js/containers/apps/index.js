@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import RouterLink from '../../config/routerlink';
-import {BrowserRouter as Routes , Router} from 'react-router-dom';
+import { BrowserRouter as Routes, Router } from 'react-router-dom';
 import Header from '../layouts/header/header';
 import history from '../../config/history';
+import Login from '../auth/Login';
 function App() {
     return (
         <Router history={history}>
             <Routes >
-                <Header/>
-                <RouterLink/>
+                <Header />
+                <RouterLink />
             </Routes>
         </Router>
     );

@@ -1,10 +1,13 @@
 import React from 'react';
 
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { Container } from '@material-ui/core';
 const Brands = () => {
-    return(
-        <div>
-            <p>Brands</p>
-        </div>
+    return (
+        <Container>
+            <CssBaseline />
+            <p>OrderItems</p>
+        </Container>
     )
 }
 

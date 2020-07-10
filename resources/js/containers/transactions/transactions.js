@@ -1,10 +1,14 @@
 import React from 'react';
 
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { Container } from '@material-ui/core';
 const Transactions = () => {
     return (
-        <div>
-            <p>Transactions Pages</p>
-        </div>
+
+        <Container>
+            <CssBaseline />
+            <p>Transactions</p>
+        </Container>
     )
 }
 
