@@ -5,14 +5,17 @@ import { BrowserRouter as Routes, Router } from 'react-router-dom';
 import Header from '../layouts/header/header';
 import history from '../../config/history';
 import Login from '../auth/Login';
+import { LandingProvider } from '../../context/LandingContext';
 function App() {
     return (
-        <Router history={history}>
-            <Routes >
-                <Header />
-                <RouterLink />
-            </Routes>
-        </Router>
+        <LandingProvider>
+            <Router history={history}>
+                <Routes >
+                    <Header />
+                    <RouterLink />
+                </Routes>
+            </Router>
+        </LandingProvider>
     );
 }
 
