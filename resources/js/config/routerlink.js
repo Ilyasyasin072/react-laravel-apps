@@ -13,6 +13,7 @@ import Products from '../containers/products/Products';
 import Stores from '../containers/stores/Stores';
 import Stocks from '../containers/stocks/Stocks';
 import Login from '../containers/auth/Login';
+import Category from '../containers/category/category';
 class RouterLink extends Component {
     render() {
         return (
@@ -30,6 +31,7 @@ class RouterLink extends Component {
                 <Route path="/stores" component={Stores} />
                 <Route path="/stock" component={Stocks} />
                 <Route path="/auth" component={Login} />
+                <Route path="/category" component={Category} />
             </Switch>
         );
     }

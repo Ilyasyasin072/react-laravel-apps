@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\categories;
 class CategoriesController extends Controller
-{
+{ 
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +13,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = categories::all();
+        return response()->json(['status' => 'succcess', 'categories' => $categories], 201);
     }
 
     /**

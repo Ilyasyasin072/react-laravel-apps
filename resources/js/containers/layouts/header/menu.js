@@ -46,6 +46,7 @@ const MenuHeader = () => {
     const [customer, setCustomer] = useState(null);
     const [staffs, setStaff] = useState(null);
     const [logout, setLogout] = useState(null);
+    const [category, setCategory] = useState(null);
 
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);
@@ -59,15 +60,20 @@ const MenuHeader = () => {
     const handleLogout = (e) => {
         setLogout(e.currentTarget);
     }
+
+    const handleCategory = (e) => {
+        setCategory(e.currentTarget);
+    }
     const handleClose = () => {
         setAnchorEl(null);
         setCustomer(null);
         setStaff(null);
         setLogout(null);
+        setCategory(null);
     }
     return (
         <div>
-            <Button component={Link} onClick={handleClick} aria-controls="customized-menu" color="inherit"><Assignment /></Button>
+            <Button onClick={handleClick} aria-controls="customized-menu" color="inherit"><Assignment /></Button>
             <StyledMenu
                 id="customized-menu"
                 anchorEl={anchorEl}
@@ -94,7 +100,7 @@ const MenuHeader = () => {
                     <ListItemText primary="transaction" />
                 </StyledMenuItem>
             </StyledMenu>
-            <Button component={Link} onClick={handleCustomer} aria-controls="customized-menu-customer" color="inherit"><Face /></Button>
+            <Button onClick={handleCustomer} aria-controls="customized-menu-customer" color="inherit"><Face /></Button>
             <StyledMenu
                 id="customized-menu-customer"
                 anchorEl={customer}
@@ -109,7 +115,7 @@ const MenuHeader = () => {
                     <ListItemText primary="Customer" />
                 </StyledMenuItem>
             </StyledMenu>
-            <Button component={Link} onClick={handleStaff} aria-controls="customized-menu-customer" color="inherit"><ViewAgenda /></Button>
+            <Button onClick={handleStaff} aria-controls="customized-menu-customer" color="inherit"><ViewAgenda /></Button>
             <StyledMenu
                 id="customized-menu-customer"
                 anchorEl={staffs}
@@ -124,7 +130,7 @@ const MenuHeader = () => {
                     <ListItemText primary="staffs" />
                 </StyledMenuItem>
             </StyledMenu>
-            <Button component={Link} onClick={handleLogout} aria-controls="customized-menu-customer" color="inherit"><ArrowBack /></Button>
+            <Button onClick={handleLogout} aria-controls="customized-menu-customer" color="inherit"><ArrowBack /></Button>
             <StyledMenu
                 id="customized-menu-customer"
                 anchorEl={logout}
@@ -135,12 +141,25 @@ const MenuHeader = () => {
                 <StyledMenuItem component={Link} to="auth" >
                     <ListItemText primary="Login" />
                 </StyledMenuItem>
-                <StyledMenuItem component={Link} >
+                <StyledMenuItem >
                     <ListItemText primary="Profile" />
                 </StyledMenuItem>
-                <StyledMenuItem component={Link} >
+                <StyledMenuItem >
                     <ListItemText primary="Logout" />
                 </StyledMenuItem>
+            </StyledMenu>
+            <Button onClick={handleCategory} aria-controls="customized-menu-category" color="inherit"><Home /></Button>
+            <StyledMenu
+                id="customized-menu-category"
+                anchorEl={category}
+                keepMounted
+                open={Boolean(category)}
+                onClose={handleClose}
+            >
+                <StyledMenuItem component={Link} to="category" >
+                    <ListItemText primary="Category" />
+                </StyledMenuItem>
+
             </StyledMenu>
         </div >
     )

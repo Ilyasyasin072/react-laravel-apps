@@ -17,9 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-
-
 Route::group(['prefix' => 'inventory'], function(){
     Route::get('/','InventoryController@index');
     Route::delete('/delete/{id}', 'InventoryController@destroy');
@@ -30,4 +27,8 @@ Route::group(['prefix' => 'inventory'], function(){
 Route::group(['prefix' => 'auth'], function(){
     Route::post('register', 'UserController@register');
     Route::post('login', 'UserController@login');
+
+    Route::group(['prefix' => 'category'], function(){
+        Route::get('/' , 'CategoriesController@index')->name('category')->middleware('jwt.verify');
+    });
 });

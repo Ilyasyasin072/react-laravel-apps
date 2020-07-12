@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import { setUserSession } from '../../config/common';
 
 function Copyright() {
     return (
@@ -46,9 +49,39 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 export default function Login() {
     const classes = useStyles();
+    const initialize = { id: null, name: '', password: ' ' }
+    const [login, setLogin] = useState(initialize);
+    const history = useHistory();
 
+    const handleChange = event => {
+        const { name, value } = event.target;
+        // console.log(value);
+        setLogin({ ...login, [name]: value });
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const data = {
+            name: login.name,
+            password: login.password
+        }
+
+        axios.post('http://127.0.0.1:8000/api/auth/login', data)
+            .then(result => {
+                if (result.data.status == "user invalid") {
+                    history.push('/auth');
+                } else {
+                    history.push('/');
+                    setLogin(result.data);;
+                    setUserSession(result.data.getuser.token, result.data.getuser);
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+    }
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -65,11 +98,11 @@ export default function Login() {
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
                         label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        name="name"
                         autoFocus
+                        value={login.name}
+                        onChange={handleChange}
                     />
                     <TextField
                         variant="outlined"
@@ -80,6 +113,8 @@ export default function Login() {
                         label="Password"
                         type="password"
                         id="password"
+                        value={login.password}
+                        onChange={handleChange}
                         autoComplete="current-password"
                     />
                     <FormControlLabel
@@ -92,6 +127,7 @@ export default function Login() {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={onSubmit}
                     >
                         Sign In
           </Button>

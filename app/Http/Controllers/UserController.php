@@ -38,14 +38,15 @@ class UserController extends Controller
         try {
             if($token = JWTAuth::attempt($credentials)) {
                 $users = auth()->user()->id;
+                $getuser = User::find($users);
+                // dd($getuser);
                 $updateToken = User::find($users)->update(['token' => $token]);
-                return response()->json(compact('updateToken'));
+                return response()->json(compact('token', 'getuser'));
             }
+            return response()->json(['status' => 'user invalid'], 500);
         } catch (\Throwable $th) {
             //throw $th;
-            return response()->json([
-                'errors' => 'Invalid Users',
-            ]);
+            return response()->json(['status' => 'user invalid'], 500);
         }
     }
 }
