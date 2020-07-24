@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
-import { Home, Book, AccountBox } from '@material-ui/icons'
+import { Home, ArrowBackIos, ArrowForward } from '@material-ui/icons'
 import MenuHeader from './menu';
 import axios from 'axios';
 import { remmoveUserSession } from '../../../config/common';
@@ -24,18 +24,28 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Header = () => {
-    const classes = useStyles();
-    const history = useHistory();
+const Menus = () => {
+    return (<MenuHeader />);
+}
 
+const Logout = () => {
+    const history = useHistory();
     const handleLogout = () => {
         const url = 'http://127.0.0.1:8000/api/auth/logout';
         axios.get(url).then(result => {
             console.log(result);
             remmoveUserSession();
             history.push('/auth');
+            alert('logout Berhasil');
         })
     }
+    return (<Button onClick={handleLogout} style={{ color: 'white' }}><ArrowBackIos /></Button>);
+}
+
+const Header = () => {
+    const classes = useStyles();
+    const token = sessionStorage.getItem('item');
+
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -46,11 +56,18 @@ const Header = () => {
                     <Typography variant="h6" className={classes.title}>
                         React | Laravel
                     </Typography>
-                    <Link to="/" style={{ color: "white" }}>
-                        <Button color="inherit"><Home /></Button>
-                    </Link>
-                    <MenuHeader />
-                    <Button onClick={handleLogout}>Logout</Button>
+                    {
+                        token ? <div>
+                            <Link to="/" style={{ color: "white" }}>
+                                <Button color="inherit"><Home /></Button>
+                            </Link>
+                            <Link to="auth" style={{ color: "white" }}>
+                                <Button color="inherit"><ArrowForward /></Button>
+                            </Link>
+                            <Menus />
+                        </div> : <Logout />
+                    }
+
                 </Toolbar>
             </AppBar>
         </div>
