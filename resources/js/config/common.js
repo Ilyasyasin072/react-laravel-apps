@@ -12,6 +12,8 @@ export const token = () => {
 export const remmoveUserSession = () => {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('getuser');
+    localStorage.removeItem('token');
+    localStorage.removeItem('getuser');
 }
 
 export const setUserSession = (token, users) => {

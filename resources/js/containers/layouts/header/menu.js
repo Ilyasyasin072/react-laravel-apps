@@ -144,7 +144,7 @@ const MenuHeader = () => {
                 <StyledMenuItem >
                     <ListItemText primary="Profile" />
                 </StyledMenuItem>
-                <StyledMenuItem >
+                <StyledMenuItem>
                     <ListItemText primary="Logout" />
                 </StyledMenuItem>
             </StyledMenu>

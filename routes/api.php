@@ -27,7 +27,7 @@ Route::group(['prefix' => 'inventory'], function(){
 Route::group(['prefix' => 'auth'], function(){
     Route::post('register', 'UserController@register');
     Route::post('login', 'UserController@login');
-
+    Route::get('logout', 'UserController@logout');
     Route::group(['prefix' => 'category'], function(){
         Route::get('/' , 'CategoriesController@index')->name('category')->middleware('jwt.verify');
     });

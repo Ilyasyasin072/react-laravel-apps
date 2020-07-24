@@ -49,4 +49,10 @@ class UserController extends Controller
             return response()->json(['status' => 'user invalid'], 500);
         }
     }
+
+    public function logout()
+    {
+        $logout = auth()->logout();
+        return response()->json(['status' => 'logout successs'], 200);
+    }
 }

@@ -9,6 +9,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
 import { Home, Book, AccountBox } from '@material-ui/icons'
 import MenuHeader from './menu';
+import axios from 'axios';
+import { remmoveUserSession } from '../../../config/common';
+import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -23,6 +26,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
     const classes = useStyles();
+    const history = useHistory();
+
+    const handleLogout = () => {
+        const url = 'http://127.0.0.1:8000/api/auth/logout';
+        axios.get(url).then(result => {
+            console.log(result);
+            remmoveUserSession();
+            history.push('/auth');
+        })
+    }
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -37,6 +50,7 @@ const Header = () => {
                         <Button color="inherit"><Home /></Button>
                     </Link>
                     <MenuHeader />
+                    <Button onClick={handleLogout}>Logout</Button>
                 </Toolbar>
             </AppBar>
         </div>
